@@ -16,6 +16,7 @@ This project is intended to build a general Content Management System(CMS) for r
 - Customer choose restaurant and coupon from the list to buy
 
 <br>
+
 ## 2. Authorization Permissions for Diffente Role
 
 - Restaurant Entity – Create, Update, and Delete Functionality – Admin Role
