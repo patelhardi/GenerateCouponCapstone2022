@@ -2,19 +2,21 @@
 ## 1. About the Project
 <br>
 This project is intended to build a general Content Management System(CMS) for restaurant owners to generate Coupons for customers and send an email notifications to the customers. There are many functions included:
+<br>
 
-**Admin Role
+## Admin Role
 - Manage Coupon (CRUD)
 - Manage Restaurant (CRUD)
 - Manage Customers (CRUD)
 - Manage relationship between Coupon and Restaurant
 - Manage relationship between Coupon and Customer
-**Customer Role
+- <br>
+## Customer Role
 - Customer create profile
 - Customer choose restaurant and coupon from the list to buy
 
 <br>
-### 2. Authorization Permissions for Diffente Role
+## 2. Authorization Permissions for Diffente Role
 
 - Restaurant Entity – Create, Update, and Delete Functionality – Admin Role
 - Coupon Entity – Create, Update, and Delete Functionality – Admin Role
