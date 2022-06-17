@@ -1,0 +1,64 @@
+﻿@model GenerateCouponCapstone2022.Models.ViewModels.UpdateEmail
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div>
+    <a href="/Email/List" role="button" style="color: peru;">
+        <span class="glyphicon glyphicon-arrow-left"></span> Back to the Email List Page
+    </a>
+</div>
+
+<h2>Update Email</h2>
+
+<form action="/Email/Update/@Model.SelectedEmail.EmailID" method="post" class="editForm" style="border-radius: 5px; padding: 20px;">
+    <div style="display:none;">
+        @* Pass through the email ID *@
+        <input type="text" name="EmailID" value="@Model.SelectedEmail.EmailID" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
+    </div>
+    <div class="row">
+        <div class="col-25" style="float: left; width: 25%; margin-top: 5px;">
+            <label style="padding: 12px 12px 12px 0; display: inline-block;">Customer: <span style="color: red;">*</span></label>
+        </div>
+        <div class="col-75" style="float: left; width: 75%; margin-top: 5px;">
+            <select name="CustomerID" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;">
+                <option value="0">Select Customer</option>
+                @foreach (var customer in Model.CustomerOptions)
+                {
+                    <option value="@customer.CustomerID">@customer.Name</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-25" style="float: left; width: 25%; margin-top: 5px;">
+            <label style="padding: 12px 12px 12px 0; display: inline-block;">Message: <span style="color: red;">*</span></label>
+        </div>
+        <div class="col-75" style="float: left; width: 75%; margin-top: 5px;">
+            <textarea name="Message" value="@Model.SelectedEmail.Message" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;"></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-25" style="float: left; width: 25%; margin-top: 5px;">
+            <label style="padding: 12px 12px 12px 0; display: inline-block;">CreatedAt:</label>
+        </div>
+        <div class="col-75" style="float: left; width: 75%; margin-top: 5px;">
+            <input type="date" name="CreatedAt" value="@Model.SelectedEmail.CreatedAt.ToShortDateString()" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-25" style="float: left; width: 25%; margin-top: 5px;">
+            <label style="padding: 12px 12px 12px 0; display: inline-block;">Coupon: <span style="color: red;">*</span></label>
+        </div>
+        <div class="col-75" style="float: left; width: 75%; margin-top: 5px;">
+            <select name="CouponID" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;">
+                <option value="0">Select Coupon</option>
+                @foreach (var coupon in Model.CouponOptions)
+                {
+                    <option value="@coupon.CouponID">@coupon.Title</option>
+                }
+            </select>
+        </div>
+    </div>
+    <button type="submit" value="Update Email" style="background-color: peachpuff; color: black; padding: 12px 20px; border: none; border-radius: 4px;"><span class="glyphicon glyphicon-edit"></span> Update Email</button>
+</form>

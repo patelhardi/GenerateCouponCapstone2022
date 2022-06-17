@@ -1,0 +1,47 @@
+﻿@model GenerateCouponCapstone2022.Models.CustomerDto
+@{
+    ViewBag.Title = "New";
+}
+
+<h2>Create Customer</h2>
+
+<form action="/Customer/Create" method="POST" style="border-radius: 5px; padding: 20px;">
+    <div class="row">
+        <div class="col-25" style="float: left; width: 25%; margin-top: 5px;">
+            <label style="padding: 12px 12px 12px 0; display: inline-block;">Name: <span style="color: red;">*</span></label>
+        </div>
+        <div class="col-75" style="float: left; width: 75%; margin-top: 5px;">
+            <input type="text" name="Name" data-val="true" data-val-required="Please Enter a valid Customer Name" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger", data_valmsg_for = "Name" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-25" style="float: left; width: 25%; margin-top: 5px;">
+            <label style="padding: 12px 12px 12px 0; display: inline-block;">Email: <span style="color: red;">*</span></label>
+        </div>
+        <div class="col-75" style="float: left; width: 75%; margin-top: 5px;">
+            <input type="text" name="Email" data-val="true" data-val-required="Please Enter a valid Email Address" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger", data_valmsg_for = "Email" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-25" style="float: left; width: 25%; margin-top: 5px;">
+            <label style="padding: 12px 12px 12px 0; display: inline-block;">Phone:</label>
+        </div>
+        <div class="col-75" style="float: left; width: 75%; margin-top: 5px;">
+            <input type="text" name="Phone" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-25" style="float: left; width: 25%; margin-top: 5px;">
+            <label style="padding: 12px 12px 12px 0; display: inline-block;">Do you want to get email notifications? <span style="color: red;">*</span></label>
+        </div>
+        <div class="col-75" style="float: left; width: 75%; margin-top: 15px;">
+            <input type="radio" id="yes" name="IsSubscribed" value="True" required="required">
+            <label for="yes">Yes</label>
+            <input type="radio" id="no" name="IsSubscribed" value="False" checked>
+            <label for="no">No</label>
+        </div>
+    </div>
+    <button type="submit" value="Create Customer" style="background-color: peachpuff; color: black; padding: 12px 20px; border: none; border-radius: 4px;"><span class="glyphicon glyphicon-plus"></span> Create Customer</button>
+</form>

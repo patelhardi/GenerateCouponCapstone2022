@@ -1,0 +1,36 @@
+﻿@model IEnumerable<GenerateCouponCapstone2022.Models.RestaurantDto>
+@{
+    ViewBag.Title = "List";
+}
+
+<div style="color: green;">
+    @{
+        string message = TempData["Message"] as string;
+        if (!String.IsNullOrEmpty(message))
+        {
+            <div class="message">
+                <p>@message</p>
+            </div>
+        }
+    }
+</div>
+
+<h2 style="color:peru">List of Restaurants</h2>
+
+<table class="table table-responsive table-striped">
+    <tbody>
+        @foreach (var restaurant in Model)
+        {
+            <tr>
+                <td><h3>@restaurant.Name</h3> <br /> Address: @restaurant.Address</td>
+                <td><a class="btn btn-lg" href="/Restaurant/Details/@restaurant.RestaurantID"><span class="glyphicon glyphicon-eye-open" style="margin-top: 50px;"></span></a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <form action="/Restaurant/New" method="POST" style="border-radius: 5px; padding: 20px; margin:10px;">
+        <button type="submit" value="Create Restaurant" style="background-color: peachpuff; color: black; padding: 12px 20px; border: none; border-radius: 4px;"><span class="glyphicon glyphicon-plus"></span> Create Restaurant</button>
+    </form>
+</div>

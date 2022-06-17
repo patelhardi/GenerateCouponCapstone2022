@@ -1,0 +1,63 @@
+﻿@model GenerateCouponCapstone2022.Models.ViewModels.DetailCoupon
+@{
+    ViewBag.Title = "Details";
+}
+
+<div>
+    <a href="/Coupon/List" style="color: peru;"><span class="glyphicon glyphicon-arrow-left"></span> Back to Coupon List Page</a>
+</div>
+
+<h2>Coupon Details</h2>
+
+<hr/>
+
+@{
+    string imageurl = "/Content/Images/Coupons/default.jpg";
+    if (Model.SelectedCoupon.Image != null)
+    {
+        imageurl = "/Content/Images/Coupons/" + Model.SelectedCoupon.Image;
+    }
+}
+<div style="display: block; height: auto; width: 100%; background-image: linear-gradient(to left top, #ffb99f, #ffbe89, #ffc670, #ffd356, #f4e23c); position: relative; margin-top: 100px; ">
+    <div style="position: absolute; height: 70px; width: 50px; border-radius: 50px; border: 3px solid white; top: 50%; margin-top: -20px; left: -25px; background: white;"></div>
+    <div style="position: absolute; height: 70px; width: 50px; border-radius: 50px; border: 3px solid white; top: 50%; margin-top: -20px; right: -25px; background: white;"></div>
+
+
+    <div class="row" style="text-align:center;">
+        <div class="col-md-4">
+            <img class="img-rounded" alt="@Model.SelectedCoupon.Title" src="@imageurl" style="height: auto; width: 75%; margin-top: 5px; margin-bottom: 5px; " />
+        </div>
+        <div class="col-md-8" style=" margin-top: 2.5%;">
+            <h3>@Model.SelectedCoupon.Title</h3>
+            <p>@Html.Raw(Model.SelectedCoupon.Description)</p>
+            <p>Expiry Date: @Model.SelectedCoupon.ExpiryDate.ToLongDateString()</p>
+            <p>Valid store: @Model.SelectedCoupon.RName</p>
+            <p>Coupon Code: @Model.SelectedCoupon.CouponCode</p>
+        </div>
+    </div>
+</div>
+
+<hr/>
+
+<div>
+    <h3>List of Customers who Used @Model.SelectedCoupon.Title Coupon</h3>
+    @foreach (var customer in Model.KeptCustomers)
+    {
+        <label style="padding: 12px 12px 12px 0; display: inline-block;">@customer.Name</label>
+        <br />
+    }
+</div>
+
+<hr/>
+
+<div>
+    <form action="/Coupon/Edit/@Model.SelectedCoupon.CouponID" method="POST" style="border-radius: 5px; padding: 20px; margin:10px;">
+        <button type="submit" value="Update Coupon" style="background-color: peachpuff; color: black; padding: 12px 20px; border: none; border-radius: 4px;"><span class="glyphicon glyphicon-edit"></span> Update Coupon</button>
+    </form>
+</div>
+
+<div>
+    <form action="/Coupon/DeleteConfirm/@Model.SelectedCoupon.CouponID" method="POST" style="border-radius: 5px; padding: 20px; margin:10px;">
+        <button type="submit" value="Delete Coupon" style="background-color: peachpuff; color: black; padding: 12px 20px; border: none; border-radius: 4px;"><span class="trashIcon glyphicon glyphicon-trash"></span> Delete Coupon</button>
+    </form>
+</div>

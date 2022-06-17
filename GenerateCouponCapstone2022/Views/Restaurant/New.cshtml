@@ -1,0 +1,35 @@
+﻿@model GenerateCouponCapstone2022.Models.RestaurantDto
+@{
+    ViewBag.Title = "New";
+}
+
+<h2>Create New Restaurant</h2>
+
+<form action="/Restaurant/Create" method="POST" style="border-radius: 5px; padding: 20px;">
+    <div class="row">
+        <div class="col-25" style="float: left; width: 25%; margin-top: 5px;">
+            <label style="padding: 12px 12px 12px 0; display: inline-block;">Name: <span style="color: red;">*</span></label>
+        </div>
+        <div class="col-75" style="float: left; width: 75%; margin-top: 5px;">
+            <input type="text" name="Name" data-val="true" data-val-required="Please Enter a valid Restaurant Name" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger", data_valmsg_for = "Name" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-25" style="float: left; width: 25%; margin-top: 5px;">
+            <label style="padding: 12px 12px 12px 0; display: inline-block;">Address:</label>
+        </div>
+        <div class="col-75" style="float: left; width: 75%; margin-top: 5px;">
+            <input type="text" name="Address" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-25" style="float: left; width: 25%; margin-top: 5px;">
+            <label style="padding: 12px 12px 12px 0; display: inline-block;">Phone:</label>
+        </div>
+        <div class="col-75" style="float: left; width: 75%; margin-top: 5px;">
+            <input type="text" name="Phone" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
+        </div>
+    </div>
+    <button type="submit" value="Create Restaurant" style="background-color: peachpuff; color: black; padding: 12px 20px; border: none; border-radius: 4px;"><span class="glyphicon glyphicon-plus"></span> Create Restaurant</button>
+</form>

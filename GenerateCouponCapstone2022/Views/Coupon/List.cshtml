@@ -1,0 +1,53 @@
+﻿@using Microsoft.AspNet.Identity
+@model GenerateCouponCapstone2022.Models.ViewModels.ListCoupon
+@{
+    ViewBag.Title = "List";
+}
+
+<div style="color: green;">
+    @{
+        string message = TempData["Message"] as string;
+        if (!String.IsNullOrEmpty(message))
+        {
+            <div class="message">
+                <p>@message</p>
+            </div>
+        }
+    }
+</div>
+
+<h2 style="color: peru">List of Coupons</h2>
+
+<table class="table table-responsive table-striped">
+    <tbody>
+        @foreach (var coupon in Model.ListCoupons)
+        {
+            <tr>
+                <td><h3>@coupon.Title</h3> <br /> Coupon Code: @coupon.CouponCode <br /> Valid Until: @coupon.ExpiryDate.ToLongDateString() <br /> Valid Store: @coupon.RName</td>
+                <td><a class="btn btn-lg" href="/Coupon/Details/@coupon.CouponID"><span class="glyphicon glyphicon-eye-open" style="margin-top: 50px;"></span></a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<hr />
+
+<h2 style="color: peru">List of Expired Coupons</h2>
+
+<table class="table table-responsive table-striped">
+    <tbody>
+        @foreach (var coupon in Model.ExpiredCoupons)
+        {
+            <tr>
+                <td><h3>@coupon.Title</h3> <br /> Coupon Code: @coupon.CouponCode <br /> Valid Until: @coupon.ExpiryDate.ToLongDateString() <br /> Valid Store: @coupon.RName</td>
+                <td><a class="btn btn-lg" href="/Coupon/Details/@coupon.CouponID"><span class="glyphicon glyphicon-eye-open" style="margin-top: 50px;"></span></a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <form action="/Coupon/New" method="GET" style="border-radius: 5px; padding: 20px; margin:10px;">
+        <button type="submit" value="Generate Coupon" style="background-color: peachpuff; color: black; padding: 12px 20px; border: none; border-radius: 4px;"><span class="glyphicon glyphicon-plus"></span> Generate Coupon</button>
+    </form>
+</div>

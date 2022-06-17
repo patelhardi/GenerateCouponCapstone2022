@@ -1,0 +1,9 @@
+﻿{
+    "CouponID":1,
+    "CouponCode":"G50",
+    "Title":"Get 50% off",
+    "ExpiryDate":"June20,2022",
+    "Image":"1.png",
+    "Description": "Mother's Day special offer!",
+    "RName":"Pizza Pizza"
+}

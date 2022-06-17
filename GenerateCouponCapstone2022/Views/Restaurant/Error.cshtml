@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "Error";
+}
+
+<div style="color: red;">
+    @{
+        string message = TempData["Message"] as string;
+        if (!String.IsNullOrEmpty(message))
+        {
+            <div class="message">
+                <p>@message</p>
+            </div>
+        }
+    }
+</div>
+
+<h2>Something wrong in the code!</h2>

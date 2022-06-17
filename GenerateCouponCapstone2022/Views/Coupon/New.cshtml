@@ -1,0 +1,88 @@
+﻿@model GenerateCouponCapstone2022.Models.ViewModels.UpdateCoupon
+@{
+    ViewBag.Title = "New";
+}
+
+<h2>Generate Coupon</h2>
+
+<form action="/Coupon/Create" method="POST" enctype="multipart/form-data" style="border-radius: 5px; padding: 20px;">
+    <div class="row">
+        <div class="col-25" style="float: left; width: 25%; margin-top: 5px;">
+            <label style="padding: 12px 12px 12px 0; display: inline-block;">Coupon Code: <span style="color: red;">*</span></label>
+        </div>
+        <div class="col-75" style="float: left; width: 75%; margin-top: 5px;">
+            <input type="text" name="CouponCode" data-val="true" data-val-required="Please Enter a valid Coupon Code" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
+            @Html.ValidationMessageFor(model => model.SelectedCoupon.CouponCode, "", new { @class = "text-danger", data_valmsg_for = "CouponCode" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-25" style="float: left; width: 25%; margin-top: 5px;">
+            <label style="padding: 12px 12px 12px 0; display: inline-block;">Title: <span style="color: red;">*</span></label>
+        </div>
+        <div class="col-75" style="float: left; width: 75%; margin-top: 5px;">
+            <input type="text" name="Title" data-val="true" data-val-required="Please Enter a Valid Title" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
+            @Html.ValidationMessageFor(model => model.SelectedCoupon.Title, "", new { @class = "text-danger", data_valmsg_for = "Title" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-25" style="float: left; width: 25%; margin-top: 5px;">
+            <label style="padding: 12px 12px 12px 0; display: inline-block;">Expiry Date: <span style="color: red;">*</span></label>
+        </div>
+        <div class="col-75" style="float: left; width: 75%; margin-top: 5px;">
+            <input type="date" name="ExpiryDate" id="myDate" data-val="true" data-val-required="Please Enter a Valid Expiry Date" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
+            @Html.ValidationMessageFor(model => model.SelectedCoupon.ExpiryDate, "", new { @class = "text-danger", data_valmsg_for = "ExpiryDate" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-25" style="float: left; width: 25%; margin-top: 5px;">
+            <label style="padding: 12px 12px 12px 0; display: inline-block;">Description: <span style="color: red;">*</span></label>
+        </div>
+        <div class="col-75" style="float: left; width: 75%; margin-top: 5px;">
+            <textarea name="Description" data-val="true" data-val-required="Please Enter a Description" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;"></textarea>
+            @Html.ValidationMessageFor(model => model.SelectedCoupon.Description, "", new { @class = "text-danger", data_valmsg_for = "Description" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-25" style="float: left; width: 25%; margin-top: 5px;">
+            <label style="padding: 12px 12px 12px 0; display: inline-block;">Restaurant Name:</label>
+        </div>
+        <div class="col-75" style="float: left; width: 75%; margin-top: 5px;">
+            <select name="RestaurantID" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;">
+                <option value="0">Select Restaurant</option>
+                @foreach (var restaurant in Model.RestaurantOptions)
+                {
+                    <option value="@restaurant.RestaurantID">@restaurant.Name</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-25" style="float: left; width: 25%; margin-top: 5px;">
+            <label style="padding: 12px 12px 12px 0; display: inline-block;">Upload Image:</label>
+        </div>
+        <div class="col-75" style="float: left; width: 75%; margin-top: 5px;">
+            <input type="file" name="CouponPic" style="padding: 12px 20px; border: none; border-radius: 4px;" />
+        </div>
+    </div>
+    <button type="submit" value="Generate Coupon" style="background-color: peachpuff; color: black; padding: 12px 20px; border: none; border-radius: 4px;"><span class="glyphicon glyphicon-plus"></span> Generate Coupon</button>
+</form>
+
+<!--JavaScript jQuery for select expiry date-->
+<!--Reference: https://stackoverflow.com/questions/43274559/how-do-i-restrict-past-dates-in-html5-input-type-date-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+    $(function () {
+        var dtToday = new Date();
+
+        var month = dtToday.getMonth() + 1;
+        var day = dtToday.getDate();
+        var year = dtToday.getFullYear();
+        if (month < 10)
+            month = '0' + month.toString();
+        if (day < 10)
+            day = '0' + day.toString();
+
+        var maxDate = year + '-' + month + '-' + day;
+        $('#myDate').attr('min', maxDate);
+    });
+</script>

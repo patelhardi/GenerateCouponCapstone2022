@@ -1,0 +1,101 @@
+﻿@model GenerateCouponCapstone2022.Models.ViewModels.DetailCustomer
+@{
+    ViewBag.Title = "Details";
+}
+
+<div>
+    <a href="/Customer/List" style="color: peru;"><span class="glyphicon glyphicon-arrow-left"></span> Back to Customer List Page</a>
+</div>
+
+<h2>Customer Details</h2>
+
+<hr />
+
+<h3>Name: @Model.SelectedCustomer.Name</h3>
+<p>Email: @Model.SelectedCustomer.Email</p>
+<p>Phone: @Model.SelectedCustomer.Phone</p>
+<p>IsSubscribed for email notification: @Model.SelectedCustomer.IsSubscribed</p>
+
+<div>
+    <form action="/Customer/Edit/@Model.SelectedCustomer.CustomerID" method="POST" style="border-radius: 5px; padding: 20px; margin:10px;">
+        <button type="submit" value="Update Customer" style="background-color: peachpuff; color: black; padding: 12px 20px; border: none; border-radius: 4px;"><span class="glyphicon glyphicon-edit"></span> Update Customer</button>
+    </form>
+</div>
+
+<div>
+    <form action="/Customer/DeleteConfirm/@Model.SelectedCustomer.CustomerID" method="POST" style="border-radius: 5px; padding: 20px; margin:10px;">
+        <button type="submit" value="Delete Customer" style="background-color: peachpuff; color: black; padding: 12px 20px; border: none; border-radius: 4px;"><span class="trashIcon glyphicon glyphicon-trash"></span> Delete Customer</button>
+    </form>
+</div>
+
+<h3>List of Used Coupons:</h3>
+
+<hr />
+
+@foreach (var Coupon in Model.KeptCoupons)
+{
+    <a href="/Coupon/Details/@Coupon.CouponID" style="color: black;">@Coupon.Title</a>
+    <p>Valid Store: @Coupon.RName</p>
+    <p>Valid Until: @Coupon.ExpiryDate.ToLongDateString()</p>
+    <br />
+}
+
+<hr />
+
+<h3>Want to Choose More Coupons?</h3>
+
+<hr />
+
+<form method="POST" action="/Customer/AssociateCoupon/@Model.SelectedCustomer.CustomerID" class="newForm">
+    <div>
+        <select name="RestaurantID" id="restaurant">
+            <option value="0">Select Restaurant</option>
+            @foreach (var restaurant in Model.RestaurantOptions)
+            {
+                <option value="@restaurant.RestaurantID">@restaurant.Name</option>
+            }
+        </select>
+    </div>
+
+    <div>
+        <select name="CouponID" id="ddlCoupon">
+        </select>
+        <button type="submit" value="Choose Coupon" style="background-color: peachpuff; color: black; padding: 12px 20px; border: none; border-radius: 4px;"><span class="glyphicon glyphicon-hand-up"></span> Choose Coupon</button>
+    </div>
+</form>
+
+<!--JavaScript jQuery to select coupon dropdown as per the restaurant dropdown-->
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script>
+
+        $("#restaurant").change(function () {
+            var RestaurantId = parseInt($(this).val());
+
+            if (!isNaN(RestaurantId)) {
+                var ddlCoupon = $('#ddlCoupon');
+                ddlCoupon.empty();
+                ddlCoupon.append($("<option></option>").val('').html('Please wait ...'));
+
+                debugger;
+                $.ajax({
+                    url: 'https://localhost:44308/api/CouponData/ListCouponsForRestaurantwithNotExpiredCoupons',
+                    type: 'GET',
+                    dataType: 'json',
+                    data: {
+                        id: RestaurantId
+                    },
+                    success: function (d) {
+
+                        ddlCoupon.empty(); // Clear the please wait
+                        ddlCoupon.append($("<option></option>").val('').html('Select Coupon'));
+                        $.each(d, function (i, coupons) {
+                            ddlCoupon.append($("<option></option>").val(coupons.CouponID).html(coupons.Title));
+                        });
+                    },
+                    error: function () {
+                        alert('Error!');
+                    }
+                });
+            }
+        });
+</script>  

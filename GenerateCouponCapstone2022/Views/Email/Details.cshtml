@@ -1,0 +1,29 @@
+﻿@model GenerateCouponCapstone2022.Models.EmailDto
+@{
+    ViewBag.Title = "Details";
+}
+
+<div>
+    <a href="/Email/List" style="color: peru;"><span class="glyphicon glyphicon-arrow-left"></span> Back to Email List Page</a>
+</div>
+
+<h2>Email Details</h2>
+
+<hr/>
+
+<h3>Message: @Html.Raw(Model.Message)</h3>
+<p>Message Created on: @Model.CreatedAt.ToLongDateString()</p>
+<p>Customer Details: @Model.CustomerName</p>
+<p>Coupon Details: @Model.CouponCode</p>
+
+<div>
+    <form action="/Email/Edit/@Model.EmailID" method="POST" style="border-radius: 5px; padding: 20px; margin:10px;">
+        <button type="submit" value="Update Email" style="background-color: peachpuff; color: black; padding: 12px 20px; border: none; border-radius: 4px;"><span class="glyphicon glyphicon-edit"></span> Update Email</button>
+    </form>
+</div>
+
+<div>
+    <form action="/Email/DeleteConfirm/@Model.EmailID" method="POST" style="border-radius: 5px; padding: 20px; margin:10px;">
+        <button type="submit" value="Delete Email" style="background-color: peachpuff; color: black; padding: 12px 20px; border: none; border-radius: 4px;"><span class="trashIcon glyphicon glyphicon-trash"></span> Delete Email</button>
+    </form>
+</div>

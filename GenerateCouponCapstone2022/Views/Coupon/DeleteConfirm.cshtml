@@ -1,0 +1,14 @@
+﻿@model GenerateCouponCapstone2022.Models.CouponDto
+@{
+    ViewBag.Title = "DeleteConfirm";
+}
+
+<h2>Are you sure you want to delete Coupon @Model.Title?</h2>
+
+<form action="/Coupon/List" method="GET" style="border-radius: 5px; margin: 10px; padding: 20px;">
+    <button type="submit" value="Cancel" style="background-color: peachpuff; color: black; padding: 12px 20px; border: none; border-radius: 4px;"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+</form>
+
+<form action="/Coupon/Delete/@Model.CouponID" method="POST" style="border-radius: 5px; margin: 10px; padding: 20px;">
+    <button type="submit" value="Delete Coupon" style="background-color: peachpuff; color: black; padding: 12px 20px; border: none; border-radius: 4px;"><span class="trashIcon glyphicon glyphicon-trash"></span> Delete Coupon</button>
+</form>

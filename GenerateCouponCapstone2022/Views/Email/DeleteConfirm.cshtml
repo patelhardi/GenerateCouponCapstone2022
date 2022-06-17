@@ -1,0 +1,14 @@
+﻿@model GenerateCouponCapstone2022.Models.EmailDto
+@{
+    ViewBag.Title = "DeleteConfirm";
+}
+
+<h2>Are you sure you want to delete Email @Model.Message?</h2>
+
+<form action="/Email/List" method="GET" style="border-radius: 5px; padding: 20px; margin:10px;">
+    <button type="submit" value="Cancel" style="background-color: peachpuff; color: black; padding: 12px 20px; border: none; border-radius: 4px;"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+</form>
+
+<form action="/Email/Delete/@Model.EmailID" method="POST" style="border-radius: 5px; padding: 20px; margin:10px;">
+    <button type="submit" value="Delete Email" style="background-color: peachpuff; color: black; padding: 12px 20px; border: none; border-radius: 4px;"><span class="trashIcon glyphicon glyphicon-trash"></span> Delete Email</button>
+</form>
